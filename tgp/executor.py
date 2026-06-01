@@ -167,34 +167,37 @@ class NativeExecutor(BaseExecutor):
             out_path = Path(tmpdir) / out["path"].lstrip("/")
             out_path.parent.mkdir(parents=True, exist_ok=True)
 
-    def _run_command(self, cmd: List[str], tmpdir: str, timeout: int) -> None:
-        """Execute the task command in the working directory.
+    def _run_command(self, cmd, cwd, timeout):
+        """Execute a command in a working directory.
 
         Args:
             cmd: Command list to execute.
-            tmpdir: Working directory path.
-            timeout: Maximum execution time in seconds.
+            cwd: Working directory path.
+            timeout: Timeout in seconds.
+
+        Returns:
+            subprocess.CompletedProcess result.
 
         Raises:
-            ExecutionError: On non-zero exit or timeout.
+            ExecutionError: On command failure or timeout.
         """
         try:
             result = subprocess.run(
                 cmd,
-                cwd=tmpdir,
+                cwd=cwd,
                 capture_output=True,
                 text=True,
                 timeout=timeout,
+                shell=True
             )
             if result.returncode != 0:
                 raise ExecutionError(
                     "Command failed with exit code " + str(result.returncode) +
                     ": " + result.stderr
                 )
+            return result
         except subprocess.TimeoutExpired:
-            raise ExecutionError(
-                "Task timed out after " + str(timeout) + " seconds"
-            )
+            raise ExecutionError("Task timed out")
 
     def _capture_outputs(
         self, outputs: List[Dict[str, Any]], tmpdir: str
