@@ -1,0 +1,28 @@
+{
+  "kind": "task",
+  "inputs": [
+    {
+      "name": "main.c",
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "required": true
+    }
+  ],
+  "environment": {
+    "type": "native",
+    "platform": "linux/amd64"
+  },
+  "command": ["gcc", "main.c", "-o", "/out/main"],
+  "outputs": [
+    {
+      "path": "/out/main"
+    }
+  ],
+  "resources": {
+    "cpu": "1",
+    "memory": "256Mi",
+    "timeout": "60s"
+  },
+  "labels": {
+    "stage": "compile"
+  }
+}

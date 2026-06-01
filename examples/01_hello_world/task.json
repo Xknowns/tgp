@@ -1,0 +1,22 @@
+{
+  "kind": "task",
+  "inputs": [],
+  "environment": {
+    "type": "native",
+    "platform": "linux/amd64"
+  },
+  "command": ["sh", "-c", "echo 'Hello, World!' > /out/hello.txt"],
+  "outputs": [
+    {
+      "path": "/out/hello.txt"
+    }
+  ],
+  "resources": {
+    "cpu": "1",
+    "memory": "128Mi",
+    "timeout": "30s"
+  },
+  "labels": {
+    "example": "hello-world"
+  }
+}

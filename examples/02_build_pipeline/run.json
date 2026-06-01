@@ -1,0 +1,29 @@
+{
+  "kind": "task",
+  "inputs": [
+    {
+      "name": "main",
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "required": true
+    }
+  ],
+  "environment": {
+    "type": "native",
+    "platform": "linux/amd64"
+  },
+  "command": ["./main"],
+  "outputs": [
+    {
+      "path": "/out/output.txt",
+      "optional": true
+    }
+  ],
+  "resources": {
+    "cpu": "1",
+    "memory": "128Mi",
+    "timeout": "30s"
+  },
+  "labels": {
+    "stage": "run"
+  }
+}

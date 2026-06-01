@@ -1,0 +1,12 @@
+{
+  "kind": "graph",
+  "root": "sha256:COMPILE_TASK_ID",
+  "tasks": [
+    "compile.json",
+    "run.json"
+  ],
+  "metadata": {
+    "name": "c-build-pipeline",
+    "description": "Compile C program and run it"
+  }
+}
